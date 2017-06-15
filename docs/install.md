@@ -12,7 +12,7 @@ yarn add sharp
 
 * Node v4+
 * C++11 compatible compiler such as gcc 4.8+, clang 3.0+ or MSVC 2013+
-* [node-gyp](https://github.com/TooTallNate/node-gyp#installation) and its dependencies
+* [node-gyp](https://github.com/TooTallNate/node-gyp#installation) and its dependencies (includes Python)
 
 ### Linux
 
@@ -20,14 +20,14 @@ yarn add sharp
 [![Linux Build Status](https://circleci.com/gh/lovell/sharp.svg?style=svg&circle-token=6cb6d1d287a51af83722b19ed8885377fbc85e5c)](https://circleci.com/gh/lovell/sharp)
 
 libvips and its dependencies are fetched and stored within `node_modules/sharp/vendor` during `npm install`.
-This involves an automated HTTPS download of approximately 6.5MB.
+This involves an automated HTTPS download of approximately 7MB.
 
 Most recent Linux-based operating systems with glibc running on x64 and ARMv6+ CPUs should "just work", e.g.:
 
 * Debian 7, 8
 * Ubuntu 12.04, 14.04, 16.04
 * Centos 7
-* Fedora 23, 24
+* Fedora
 * openSUSE 13.2
 * Archlinux
 * Raspbian Jessie
@@ -57,7 +57,7 @@ via `sharp.cache(false)` to avoid a stack overflow.
 [![OS X 10.9.5 Build Status](https://travis-ci.org/lovell/sharp.png?branch=master)](https://travis-ci.org/lovell/sharp)
 
 libvips and its dependencies are fetched and stored within `node_modules/sharp/vendor` during `npm install`.
-This involves an automated HTTPS download of approximately 6.3MB.
+This involves an automated HTTPS download of approximately 7MB.
 
 To use your own version of libvips instead of the provided binaries, make sure it is
 at least the version listed under `config.libvips` in the `package.json` file and
@@ -68,7 +68,7 @@ that it can be located using `pkg-config --modversion vips-cpp`.
 [![Windows x64 Build Status](https://ci.appveyor.com/api/projects/status/pgtul704nkhhg6sg)](https://ci.appveyor.com/project/lovell/sharp)
 
 libvips and its dependencies are fetched and stored within `node_modules\sharp\vendor` during `npm install`.
-This involves an automated HTTPS download of approximately 9MB.
+This involves an automated HTTPS download of approximately 11MB.
 
 Only 64-bit (x64) `node.exe` is supported.
 
@@ -83,9 +83,11 @@ cd /usr/ports/graphics/vips/ && make install clean
 
 ### Heroku
 
-[Alessandro Tagliapietra](https://github.com/alex88) maintains an
-[Heroku buildpack for libvips](https://github.com/alex88/heroku-buildpack-vips)
-and its dependencies.
+libvips and its dependencies are fetched and stored within `node_modules\sharp\vendor` during `npm install`.
+This involves an automated HTTPS download of approximately 7MB.
+
+Set [NODE_MODULES_CACHE](https://devcenter.heroku.com/articles/nodejs-support#cache-behavior)
+to `false` when using the `yarn` package manager.
 
 ### Docker
 
@@ -101,6 +103,13 @@ docker pull marcbachmann/libvips
 
 ```sh
 docker pull wjordan/libvips
+```
+
+[Tailor Brands](https://github.com/TailorBrands) maintain
+[Debian-based Dockerfiles for libvips and nodejs](https://github.com/TailorBrands/docker-libvips).
+
+```sh
+docker pull tailor/docker-libvips
 ```
 
 ### AWS Lambda
@@ -134,7 +143,6 @@ You can now download your deployment ZIP using `scp` and upload it to Lambda. Be
 
 * [gulp-responsive](https://www.npmjs.com/package/gulp-responsive)
 * [grunt-sharp](https://www.npmjs.com/package/grunt-sharp)
-
 
 ### CLI tools
 
@@ -198,6 +206,7 @@ Use of libraries under the terms of the LGPLv3 is via the
 | Library       | Used under the terms of                                                                                  |
 |---------------|----------------------------------------------------------------------------------------------------------|
 | cairo         | Mozilla Public License 2.0                                                                               |
+| expat         | MIT Licence                                                                                              |
 | fontconfig    | [fontconfig Licence](https://cgit.freedesktop.org/fontconfig/tree/COPYING) (BSD-like)                    |
 | freetype      | [freetype Licence](http://git.savannah.gnu.org/cgit/freetype/freetype2.git/tree/docs/FTL.TXT) (BSD-like) |
 | giflib        | MIT Licence                                                                                              |
